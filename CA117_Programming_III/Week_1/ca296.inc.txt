@@ -1,0 +1,115 @@
+;
+; CA296 Console Library
+; (c) 2015 David Gray
+;
+IFNDEF CA296_INC
+CA296_INC equ <1>
+track PROTO STDCALL,:Ptr Byte
+version PROTO STDCALL
+readInteger PROTO STDCALL
+readIntegerWithMessage PROTO STDCALL,:Ptr Byte
+readStringWithMessage PROTO STDCALL,:Ptr Byte
+writeInteger PROTO STDCALL, :DWORD
+readRow PROTO STDCALL, :DWORD
+writeRow PROTO STDCALL, :DWORD, :DWORD
+random PROTO STDCALL,:DWORD
+setPattern PROTO STDCALL, :DWORD
+setScreenSize PROTO STDCALL,:DWORD, :DWORD
+randomArray PROTO STDCALL,:DWORD
+randomArray50 PROTO STDCALL,:DWORD
+checkCount50  PROTO STDCALL,:DWORD
+writeArray PROTO STDCALL,:DWORD, :DWORD
+fillWithRandomValues PROTO STDCALL,:DWORD, :DWORD, :DWORD
+fillAccount PROTO STDCALL,:DWORD, :DWORD
+fillAccounts PROTO STDCALL,:DWORD
+checkAccount PROTO STDCALL,:DWORD
+displayAccount PROTO STDCALL,:DWORD
+displayAccounts PROTO STDCALL,:DWORD
+process_1 PROTO STDCALL,:DWORD
+process_2 PROTO STDCALL,:DWORD
+process_3 PROTO STDCALL,:DWORD
+allocate		PROTO STDCALL,:DWORD
+release			PROTO STDCALL,:DWORD
+memoryStatus	PROTO STDCALL
+blockSize		PROTO STDCALL,:DWORD
+ff				PROTO STDCALL,:SDWORD,:SDWORD
+readRPN			PROTO STDCALL
+checkRPN		PROTO STDCALL,:SDWORD
+crash_DA				PROTO STDCALL,:DWORD
+cPrint_DA				PROTO STDCALL,:DWORD
+cFill_DA				PROTO STDCALL,:DWORD
+cIncreaseCapacity_DA	PROTO STDCALL,:DWORD,:DWORD
+cCreate_DA				PROTO STDCALL,:DWORD
+cCopy_DA				PROTO STDCALL,:DWORD
+cLength_DA				PROTO STDCALL,:DWORD
+cCapacity_DA			PROTO STDCALL,:DWORD
+cFree_DA				PROTO STDCALL,:DWORD
+cIndex_DA				PROTO STDCALL,:DWORD,:DWORD
+cEqual_DA				PROTO STDCALL,:DWORD,:DWORD
+cFindValue_DA			PROTO STDCALL,:DWORD,:DWORD,:DWORD
+map				PROTO STDCALL,:DWORD
+map1			PROTO STDCALL,:DWORD
+map2			PROTO STDCALL,:DWORD
+convert			PROTO STDCALL,:DWORD
+convert1		PROTO STDCALL,:DWORD
+convert2		PROTO STDCALL,:DWORD
+le22Check		PROTO STDCALL,:DWORD,:DWORD,:DWORD
+le221Check		PROTO STDCALL,:DWORD,:DWORD,:DWORD
+le222Check		PROTO STDCALL,:DWORD,:DWORD,:DWORD
+printList		PROTO STDCALL,:DWORD
+randomList		PROTO STDCALL,:DWORD
+releaseList		PROTO STDCALL,:DWORD
+
+printTree		PROTO STDCALL,:DWORD
+releaseTree		PROTO STDCALL,:DWORD
+randomTree		PROTO STDCALL,:SDWORD
+
+testCompleted	PROTO STDCALL,:DWORD
+testSwapData	PROTO STDCALL,:DWORD,:DWORD,:DWORD
+
+;
+; Linked List
+;
+
+LinkedList STRUCT
+	value	SDWORD	0
+	next	DWORD	0
+LinkedList ENDS
+
+;
+; Binary Tree
+;
+
+BinaryTree STRUCT
+	value		SDWORD	0
+	leftTree	DWORD	0
+	rightTree	DWORD	0
+BinaryTree ENDS
+
+;
+; CA296: Exercises 7
+;
+
+Transaction STRUCT
+	amount		SDWORD	?
+	reference	DWORD	?
+Transaction ENDS
+
+Account STRUCT
+	number				DWORD	?
+	current_balance		SDWORD	?
+	opening_balance		SDWORD	?
+	transaction_count	DWORD	?
+	transactions		Transaction 250 DUP({})
+Account ENDS
+
+Accounts STRUCT
+	count	DWORD	?
+	details	Account 250 DUP({})
+Accounts ENDS
+
+ELSE
+  echo -----------------------------------------
+  echo WARNING duplicate include fileca296.inc
+  echo -----------------------------------------
+ENDIF
